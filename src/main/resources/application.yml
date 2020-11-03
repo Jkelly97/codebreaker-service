@@ -1,0 +1,29 @@
+#spring.jpa.properties.javax.persistence.schema-generation.create-source=metadata
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=ddl.sql
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          client-id: 968371870388-le5ogn65sg2bk8rukqn6avsjrntc1lm7.apps.googleusercontent.com
+  datasource:
+    url: jdbc:derby:codebreaker_db;create=true;collation=TERRITORY_BASED:PRIMARY
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: ddl.sql
+
+server:
+  port: 18081
+  servlet:
+    context-path: /codebreaker
