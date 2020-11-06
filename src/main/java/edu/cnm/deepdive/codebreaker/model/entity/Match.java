@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.codebreaker.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,10 +33,14 @@ import org.springframework.lang.NonNull;
     name = "tournament",
     indexes = {
         @Index(columnList = "codeLength"),
-        @Index(columnList = "gameCount"),
         @Index(columnList = "started,deadline")
     }
 )
+@JsonIgnoreProperties(
+    value = {"id", "started", "originator", "winner", "players", "games"},
+    allowGetters = true, ignoreUnknown = true
+)
+@Json
 public class Match {
 
   @NonNull
@@ -90,7 +96,7 @@ public class Match {
   @OneToMany(mappedBy = "match", fetch = FetchType.LAZY,
       cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<Game> games = new LinkedList<>();
-
+@JsonIgnore
   @NonNull
   public UUID getId() {
     return id;
