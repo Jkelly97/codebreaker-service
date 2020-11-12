@@ -34,15 +34,16 @@ public class MatchController {
     return matchService.startMatch(match, (User) auth.getPrincipal());
   }
 
-  @GetMapping(value = "/{matchId}", produces =  MediaType.APPLICATION_JSON_VALUE)
-  public Match get(UUID matchId) {
+  @GetMapping(value = "/{matchId}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Match get(@PathVariable UUID matchId) {
     return matchService.get(matchId)
         .orElseThrow(NoSuchElementException::new);
   }
 
-  @GetMapping(value = "/{matchId}", produces =  MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/{matchId}/games", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Game> getGames(@PathVariable UUID matchId) {
     return matchService.getGames(matchId)
         .orElseThrow(NoSuchElementException::new);
   }
+
 }
